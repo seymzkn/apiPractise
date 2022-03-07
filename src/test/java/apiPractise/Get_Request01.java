@@ -28,6 +28,7 @@ public class Get_Request01 {
     public void getMethod02(){
         //datayi responce konteynirina attik
         Response response= given().when().get("https://restful-booker.herokuapp.com/booking/3");
+        //get methoduyla beraber endpoint kullanmak zorundayiz
 
         //postman de gordugumuz datanin aynisini burada gormus olacagiz
         //Responce body i console a yazdirmak icin response.prettyPrint();

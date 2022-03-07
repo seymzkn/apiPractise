@@ -13,7 +13,7 @@ public class Get_Request03 {
     /*
     Positive Scenario:
     When I send a GET request to REST API URL
-    https://restful-booker.herokuapp.com/bookib/1
+    https://restful-booker.herokuapp.com/booking/1
     And Accept type "application/JSON" dir
     Then
     HTTP Status Code 200
