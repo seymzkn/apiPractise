@@ -66,7 +66,9 @@ public class GetRequest10 extends TestBase {
         //maasi 3500 den cok olan iscilerin isimlerini yazdir
         List<String>nameList=json.getList("data.findAll{Integer.valueOf(it.employee_salary)>350000}.employee_name");
         System.out.println(nameList);
-        //charde nin maasinin 350000 den buyuk oldugunu verify et
+
+        softAssert.assertTrue(nameList.contains("Charde Marshall"));
+        //charde nin maasinin 350.000 den buyuk oldugunu verify et
         
 
     }

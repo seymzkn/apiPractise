@@ -24,6 +24,7 @@ public class TestBase {
 
     protected RequestSpecification spec01;  //Request ile ilgili bir cok duzenleme yapmami saglar. bu bir objedir.Heap memory de su an bir konteynir olusturduk
     protected RequestSpecification spec02;
+    protected RequestSpecification spec03;
 
     @Before
     public void setUp01() {
@@ -47,6 +48,16 @@ public class TestBase {
                 setBaseUri("https://dummy.restapiexample.com/api/v1/employees").
                 build();
 
+    }
+
+    @Before
+    public void setUp03() {
+
+        spec03 = new RequestSpecBuilder().
+                setBaseUri("https://jsonplaceholder.typicode.com/todos").
+                build();
 
     }
+
+
 }
