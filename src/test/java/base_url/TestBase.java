@@ -8,6 +8,7 @@ import io.restassured.mapper.ObjectMapper;
 import io.restassured.mapper.ObjectMapperType;
 import io.restassured.response.Response;
 import io.restassured.specification.*;
+import org.json.JSONObject;
 import org.junit.Before;
 
 import java.io.File;
@@ -16,8 +17,11 @@ import java.net.URI;
 import java.net.URL;
 import java.security.KeyStore;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import static io.restassured.RestAssured.given;
 
 public class TestBase {
     //protected lari butun child class lar kullanabilir
@@ -56,6 +60,59 @@ public class TestBase {
         spec03 = new RequestSpecBuilder().
                 setBaseUri("https://jsonplaceholder.typicode.com/todos").
                 build();
+
+    }
+
+    protected Response createRequestBodyByJsonObjectClass(){
+
+        JSONObject jsonBookingDatesRequestBody=new JSONObject();
+        jsonBookingDatesRequestBody.put("checkin","2022-02-01");
+        jsonBookingDatesRequestBody.put("checkout","2022-02-11");
+
+        JSONObject jsonRequestBody=new JSONObject();
+        jsonRequestBody.put("firstname","Ali");
+        jsonRequestBody.put("lastname","Can");
+        jsonRequestBody.put("totalprice",500);
+        jsonRequestBody.put("depositpaid",true);
+        jsonRequestBody.put("bookingdates",jsonBookingDatesRequestBody); //bookingdates in value su bir Json
+        jsonRequestBody.put("additionalneeds","Wifi");
+
+        Response response=given().
+                contentType(ContentType.JSON).
+                spec(spec01).
+                auth().basic("admin","password123").
+                body(jsonRequestBody).      //body methodu icinde hep string ister ama bu string degil json..string e cevirmek icin toString() methodu kullaniriz
+                when().
+                post("/booking");
+
+
+        return response;
+    }
+
+    protected Response createRequestBodyByMap(){
+        Map<String,String>bookingDatesMap=new HashMap<>();
+        bookingDatesMap.put("checkin","2022-02-01");
+        bookingDatesMap.put("checkout","2022-02-11");
+
+        Map <String,Object>requestBodyMap=new HashMap<>();
+        requestBodyMap.put("firstname","Ali");
+        requestBodyMap.put("lastname","Can");
+        requestBodyMap.put("totalprice",500);
+        requestBodyMap.put("depositpaid",true);
+        requestBodyMap.put("bookindates",bookingDatesMap);
+        requestBodyMap.put("additionalneeds","Wifi");
+
+        Response response=given().
+                contentType(ContentType.JSON).
+                spec(spec01).
+                auth().basic("admin","password123").
+                body(requestBodyMap.toString()).
+                when().
+                post("/booking");
+
+        response.prettyPrint();
+
+        return response;
 
     }
 
