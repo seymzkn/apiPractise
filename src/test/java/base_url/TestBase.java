@@ -29,6 +29,10 @@ public class TestBase {
     protected RequestSpecification spec01;  //Request ile ilgili bir cok duzenleme yapmami saglar. bu bir objedir.Heap memory de su an bir konteynir olusturduk
     protected RequestSpecification spec02;
     protected RequestSpecification spec03;
+    protected Map<String,String> bookingDatesMap;
+    protected Map<String,Object> requestBodyMap;
+    protected  JSONObject jsonBookingDatesRequestBody;
+    protected JSONObject jsonRequestBody;
 
     @Before
     public void setUp01() {
@@ -65,11 +69,11 @@ public class TestBase {
 
     protected Response createRequestBodyByJsonObjectClass(){
 
-        JSONObject jsonBookingDatesRequestBody=new JSONObject();
+        jsonBookingDatesRequestBody=new JSONObject();
         jsonBookingDatesRequestBody.put("checkin","2022-02-01");
         jsonBookingDatesRequestBody.put("checkout","2022-02-11");
 
-        JSONObject jsonRequestBody=new JSONObject();
+        jsonRequestBody=new JSONObject();
         jsonRequestBody.put("firstname","Ali");
         jsonRequestBody.put("lastname","Can");
         jsonRequestBody.put("totalprice",500);
@@ -90,11 +94,11 @@ public class TestBase {
     }
 
     protected Response createRequestBodyByMap(){
-        Map<String,String>bookingDatesMap=new HashMap<>();
+        bookingDatesMap=new HashMap<>();
         bookingDatesMap.put("checkin","2022-02-01");
         bookingDatesMap.put("checkout","2022-02-11");
 
-        Map <String,Object>requestBodyMap=new HashMap<>();
+        requestBodyMap=new HashMap<>();
         requestBodyMap.put("firstname","Ali");
         requestBodyMap.put("lastname","Can");
         requestBodyMap.put("totalprice",500);

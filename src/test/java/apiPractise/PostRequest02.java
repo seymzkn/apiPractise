@@ -35,7 +35,7 @@ public class PostRequest02 extends TestBase{
     @Test
     public void post01(){
 
-       Response response= createRequestBodyByJsonObjectClass();
+       Response response= createRequestBodyByJsonObjectClass(); //JSONObject class kullandik
 
         response.prettyPrint();
 
@@ -50,25 +50,25 @@ public class PostRequest02 extends TestBase{
         SoftAssert softAssert=new SoftAssert();
 
         //firstname assertion
-        softAssert.assertEquals(json.getString("booking.firstname"),"Ali");
+        softAssert.assertEquals(json.getString("booking.firstname"),jsonRequestBody.getString("firstname"));
 
         //lastname assertion
-        softAssert.assertEquals(json.getString("booking.lastname"),"Can");
+        softAssert.assertEquals(json.getString("booking.lastname"),jsonRequestBody.getString("firstname"));
 
         //totalprice assertion
-        softAssert.assertEquals(json.getInt("booking.totalprice"),500);
+        softAssert.assertEquals(json.getInt("booking.totalprice"),jsonRequestBody.getInt("totalprice"));
 
         //depositpaid assertion
-        softAssert.assertEquals(json.getBoolean("booking.depositpaid"),true);
+        softAssert.assertEquals(json.getBoolean("booking.depositpaid"),jsonRequestBody.getBoolean("depositpaid"));
 
         //checkin assertion
-        softAssert.assertEquals(json.getString("booking.bookingdates.checkin"),"2022-02-01");
+        softAssert.assertEquals(json.getString("booking.bookingdates.checkin"),jsonBookingDatesRequestBody.getString("checkin"));
 
         //checkout assertion
-        softAssert.assertEquals(json.getString("booking.bookingdates.checkout"),"2022-02-11");
+        softAssert.assertEquals(json.getString("booking.bookingdates.checkout"),jsonBookingDatesRequestBody.getString("checkout"));
 
         //checkout assertion
-        softAssert.assertEquals(json.getString("booking.additionalneeds"),"Wifi");
+        softAssert.assertEquals(json.getString("booking.additionalneeds"),jsonRequestBody.getString("depositpaid"));
 
 
         softAssert.assertAll();
